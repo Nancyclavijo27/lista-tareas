@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import './TaskForm.css'
+import './NewTaskForm.css'
 
 const NewTaskForm = ({ onTaskCreated }) => {
   const [title, setTitle] = useState('');

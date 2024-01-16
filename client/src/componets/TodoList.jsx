@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NewTaskForm from './NewTaskForm'; // Ajusta la ruta según tu estructura de carpetas
 import EditTaskModal from './EditTaskModal'; // Ajusta la ruta según tu estructura de carpetas
+import './TodoList.css'
 
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);
