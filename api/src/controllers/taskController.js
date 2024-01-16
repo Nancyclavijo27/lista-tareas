@@ -17,6 +17,14 @@ const createTask = async (req, res) => {
     if (status === null || status === undefined) {
       return res.status(400).json({ message: "El campo 'status' es obligatorio." });
     }
+
+    // Verificar si ya existe una tarea con el mismo título
+    const existingTask = await Task.findOne({ where: { title } });
+    if (existingTask) {
+      return res.status(400).json({ message: 'Ya existe una tarea con este título.' });
+    }
+
+    // Si no existe, crea la nueva tarea
     const newTask = await Task.create({ title, status });
     res.status(201).json(newTask);
   } catch (error) {
