@@ -5,7 +5,7 @@ const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize({
   dialect: 'postgres', // El dialecto para PostgreSQL
   host: process.env.DB_HOST || 'localhost',
-  database: process.env.DB_DATABASE || 'tareas', // Cambiado a 'tareas'
+  database: process.env.DB_DATABASE || 'tareas', 
   username: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || 'nancy',
   port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432,
