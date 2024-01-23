@@ -5,7 +5,7 @@ const { sequelize } = require('./src/config/database');
 const taskRoutes = require('./src/routes/taskRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = 3001; 
 
 app.use(express.json()); // Usa el middleware nativo de express para analizar el cuerpo JSON
 app.use(cors());
