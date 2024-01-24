@@ -1,22 +1,26 @@
-// Importa las bibliotecas necesarias
 const { Sequelize } = require('sequelize');
 
-// Configura la conexión a la base de datos
+const connectionString = process.env.DATABASE_URL || 'postgres://db_tacks_user:fIHAzCOsgx1ihwYO1MLDwLNNaQgOG1Sz@dpg-cmokj1qcn0vc7396oklg-a.oregon-postgres.render.com/db_tacks';
+
+const url = new URL(connectionString);
+
 const sequelize = new Sequelize({
-  dialect: 'postgres', // El dialecto para PostgreSQL
-  host: process.env.DB_HOST || 'localhost',
-  database: process.env.DB_DATABASE || 'tareas', 
-  username: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD || 'nancy',
-  port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432,
-  dialectModule: require('pg'),
+  dialect: 'postgres',
+  host: url.hostname,
+  database: url.pathname.substr(1),
+  username: url.username,
+  password: url.password,
+  port: url.port,
+  dialectOptions: {
+    ssl: true, // Agrega esto si tu base de datos requiere SSL
+    // Otras opciones de SSL si es necesario...
+  },
   define: {
-    freezeTableName: true, // Evita la pluralización automática de los nombres de las tablas
+    freezeTableName: true,
   },
   logging: console.log,
 });
 
-// Verifica la conexión a la base de datos
 sequelize
   .authenticate()
   .then(() => {
