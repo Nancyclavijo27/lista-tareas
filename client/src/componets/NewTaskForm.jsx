@@ -2,6 +2,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import './NewTaskForm.css';
 
+// Añadir variable de entorno en el código
+const apiUrl = process.env.NODE_ENV === 'production'
+  ? 'https://apitareas-ni4l.onrender.com/api'
+  : 'http://localhost:3001/api';
+
 const NewTaskForm = ({ onTaskCreated }) => {
   const [title, setTitle] = useState('');
 
@@ -10,7 +15,7 @@ const NewTaskForm = ({ onTaskCreated }) => {
 
     try {
       // Siempre crea la tarea con status 'pendiente'
-      const response = await axios.post('http://localhost:3001/api/tasks', { title, status: 'pendiente' });
+      const response = await axios.post(`${apiUrl}/tasks`, { title, status: 'pendiente' });
       onTaskCreated(response.data); // Actualiza la lista después de la creación
       setTitle('');
     } catch (error) {

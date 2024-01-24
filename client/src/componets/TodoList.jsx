@@ -4,6 +4,11 @@ import NewTaskForm from './NewTaskForm'; // Ajusta la ruta según tu estructura 
 import EditTaskModal from './EditTaskModal'; // Ajusta la ruta según tu estructura de carpetas
 import './TodoList.css';
 
+const apiUrl = process.env.NODE_ENV === 'production'
+  ? 'https://apitareas-ni4l.onrender.com/api'
+  : 'http://localhost:3001/api';
+
+
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
@@ -12,7 +17,7 @@ const TodoList = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/tasks');
+        const response = await axios.get(`${apiUrl}/tasks`);
         setTasks(response.data);
       } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -29,7 +34,7 @@ const TodoList = () => {
   const handleTaskUpdate = async (id, newStatus) => {
     try {
       const taskToUpdate = tasks.find((task) => task.id === id);
-      await axios.put(`http://localhost:3001/api/tasks/${id}`, {
+      await axios.put(`${apiUrl}/tasks/${id}`, {
         title: taskToUpdate.title,
         status: newStatus,
       });
@@ -49,7 +54,7 @@ const TodoList = () => {
 
   const handleTaskDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/api/tasks/${id}`);
+      await axios.delete(`${apiUrl}/tasks/${id}`);
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
     } catch (error) {
       console.error('Error deleting task:', error);
