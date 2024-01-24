@@ -12,7 +12,7 @@ const TodoList = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/tasks');
+        const response = await axios.get('lista-tareas-puce.vercel.app');
         setTasks(response.data);
       } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -29,7 +29,7 @@ const TodoList = () => {
   const handleTaskUpdate = async (id, newStatus) => {
     try {
       const taskToUpdate = tasks.find((task) => task.id === id);
-      await axios.put(`http://localhost:3001/api/tasks/${id}`, {
+      await axios.put(`lista-tareas-puce.vercel.app/${id}`, {
         title: taskToUpdate.title,
         status: newStatus,
       });
@@ -49,7 +49,7 @@ const TodoList = () => {
 
   const handleTaskDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/api/tasks/${id}`);
+      await axios.delete(`lista-tareas-puce.vercel.app/${id}`);
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
     } catch (error) {
       console.error('Error deleting task:', error);

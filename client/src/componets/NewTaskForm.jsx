@@ -13,7 +13,7 @@ const NewTaskForm = ({ onTaskCreated }) => {
 
     try {
       // Siempre crea la tarea con status 'pendiente'
-      const response = await axios.post('http://localhost:3001/api/tasks', { title, status: 'pendiente' });
+      const response = await axios.post('lista-tareas-puce.vercel.app', { title, status: 'pendiente' });
       onTaskCreated(response.data); // Actualiza la lista después de la creación
       setTitle('');
     } catch (error) {
