@@ -9,6 +9,7 @@ const sequelize = new Sequelize({
   username: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || 'nancy',
   port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432,
+  dialectModule: require('pg'),
   define: {
     freezeTableName: true, // Evita la pluralización automática de los nombres de las tablas
   },
