@@ -1,0 +1,27 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/tasks/(.*)",
+        "dest": "src/routes/taskRoutes.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "index.js"
+      }
+    ],
+    "env": {
+      "DB_HOST": "localhost",
+      "DB_DATABASE": "tareas",
+      "DB_USER": "postgres",
+      "DB_PASSWORD": "nancy",
+      "DB_PORT": "5432"
+    }
+  }
+  
