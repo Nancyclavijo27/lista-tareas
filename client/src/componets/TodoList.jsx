@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NewTaskForm from './NewTaskForm'; // Ajusta la ruta según tu estructura de carpetas
 import EditTaskModal from './EditTaskModal'; // Ajusta la ruta según tu estructura de carpetas
-import './TodoList.css'
+import './TodoList.css';
 
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);
@@ -12,7 +12,7 @@ const TodoList = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('lista-tareas-puce.vercel.app');
+        const response = await axios.get('http://localhost:3001/api/tasks');
         setTasks(response.data);
       } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -29,7 +29,7 @@ const TodoList = () => {
   const handleTaskUpdate = async (id, newStatus) => {
     try {
       const taskToUpdate = tasks.find((task) => task.id === id);
-      await axios.put(`lista-tareas-puce.vercel.app/${id}`, {
+      await axios.put(`http://localhost:3001/api/tasks/${id}`, {
         title: taskToUpdate.title,
         status: newStatus,
       });
@@ -49,7 +49,7 @@ const TodoList = () => {
 
   const handleTaskDelete = async (id) => {
     try {
-      await axios.delete(`lista-tareas-puce.vercel.app/${id}`);
+      await axios.delete(`http://localhost:3001/api/tasks/${id}`);
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
     } catch (error) {
       console.error('Error deleting task:', error);

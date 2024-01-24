@@ -10,6 +10,16 @@ const PORT = 3001;
 app.use(express.json()); // Usa el middleware nativo de express para analizar el cuerpo JSON
 app.use(cors());
 
+const corsOptions = {
+  origin: '*', // Permitir solicitudes desde cualquier origen
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+
+
 // Configurar las rutas y controladores para las operaciones CRUD
 app.use('/api', taskRoutes);
 

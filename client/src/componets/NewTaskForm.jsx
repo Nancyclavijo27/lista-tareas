@@ -1,19 +1,16 @@
 import { useState } from 'react';
 import axios from 'axios';
-import './NewTaskForm.css'
+import './NewTaskForm.css';
 
 const NewTaskForm = ({ onTaskCreated }) => {
   const [title, setTitle] = useState('');
-
-
-  
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     try {
       // Siempre crea la tarea con status 'pendiente'
-      const response = await axios.post('lista-tareas-puce.vercel.app', { title, status: 'pendiente' });
+      const response = await axios.post('http://localhost:3001/api/tasks', { title, status: 'pendiente' });
       onTaskCreated(response.data); // Actualiza la lista después de la creación
       setTitle('');
     } catch (error) {
